@@ -1,19 +1,18 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "com.androidstudy.adverticket"
-        minSdkVersion 14
+        minSdkVersion 16
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -25,9 +24,47 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+
+    implementation deps.support.appcompat
+    implementation deps.support.design
+    implementation deps.support.support
+    implementation deps.support.supportV13
+    implementation deps.support.preferencesV7
+    implementation deps.support.preferencesV14
+    implementation deps.support.cardview
+    implementation deps.support.recyclerview
+    implementation deps.support.constraintLayout
+    //Room - Sqlite Wrapper
+    implementation deps.room.core
+    annotationProcessor deps.room.compiler
+    implementation deps.room.lifecycleExtensions
+    //Butterknife - Bind Views
+    implementation deps.butterknife.core
+    annotationProcessor deps.butterknife.compiler
+    //Log - Replace the Android Log Class
+    implementation deps.timber
+    //Monitor Internet Connectivity
+    implementation deps.networkmanager
+    //Glide - Handle Images
+    implementation deps.glide.core
+    annotationProcessor deps.glide.compiler
+    //Recycler View Snap Helper
+    implementation deps.snaphelper
+    // Circular Profile ImageView
+    implementation deps.circleImageView
+    // Material Dialogs alt alert dialogs
+    implementation deps.materialDialogs.core
+    // Progress SnackBar
+    implementation deps.snackProgressBar
+
+    //Testing !!!
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-contrib:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'design'
+        exclude group: 'com.android.support', module: 'recyclerview-v7'
+    }
 }
